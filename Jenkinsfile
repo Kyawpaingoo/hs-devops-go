@@ -22,7 +22,7 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "sudo systemctl stop main" || true'
                     sh 'scp -o StrictHostKeyChecking=no -i ${FILENAME} app ${USERNAME}@target:'
 
-                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "chmod +x main" || true'
+                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "chmod +x main"'
                     sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "sudo systemctl start myapp" || true
                 }
             }
