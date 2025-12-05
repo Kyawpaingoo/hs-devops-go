@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "go build app.go"
+                sh "go build -o app app.go"
             }
         }
         stage('Deploy') {
