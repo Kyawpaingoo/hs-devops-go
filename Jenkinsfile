@@ -14,6 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh "go build -o app app.go"
+                sh "chmod +x app"
             }
         }
         stage('Deploy') {
