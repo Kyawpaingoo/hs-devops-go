@@ -8,7 +8,7 @@
     - name: Create a unit file
       become: True
       copy:
-        src: main.service
+        src: myapp.service
         dest: 
           /etc/systemd/system/myapp.service
 
