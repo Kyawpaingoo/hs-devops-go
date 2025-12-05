@@ -3,7 +3,7 @@
     - name: Copy the artifact
       copy:
         src: main
-        dest: /home/laborant/app
+        dest: /home/laborant/main
 
     - name: Create a unit file
       become: True
