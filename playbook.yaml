@@ -2,8 +2,8 @@
   tasks:
     - name: Copy the artifact
       copy:
-        src: main
-        dest: /home/laborant/main
+        src: app
+        dest: /home/laborant/app
 
     - name: Create a unit file
       become: True
