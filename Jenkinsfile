@@ -24,7 +24,7 @@ pipeline {
 
                     // sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "chmod +x app"'
                     // sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "sudo systemctl start main" || true'
-                    sh 'ansible-playbook --inventory hosts.ini playbook.yml'
+                    sh 'ansible-playbook --inventory hosts.ini playbook.yaml'
                 }
             }
         }
