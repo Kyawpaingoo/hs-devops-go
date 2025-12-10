@@ -37,9 +37,9 @@ pipeline {
         stage("Docker Run Image"){
             steps {
                  withCredentials([sshUserPrivateKey(credentialsId: 'mykey', keyFileVariable: 'FILENAME', usernameVariable: 'USERNAME')]) {
-                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@docker "docker stop my-go-app" || true'
+                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@docker "docker stop my-go-app || true"'
                     sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@docker "docker rm my-go-app || true"'
-                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@docker "docker run -d -p 4444:4444 ttl.sh/my-go-app:"'
+                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@docker "docker run -d -p 4444:4444 ttl.sh/my-go-app:1h"'
                 }
             }
         }
