@@ -29,9 +29,10 @@ pipeline {
         //         }
         //     }
         // }
-        stage ('Build Docker Image') {
+        stage ('Build and Push Docker Image') {
             steps {
                 sh "docker build . --tag my-go-app"
+                sh "docker push ttl.sh/my-go-app:1h"
             }
         }
         stage("Docker Run Image"){
