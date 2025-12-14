@@ -5,10 +5,11 @@ metadata:
     app: myapp
   name: myapp-deployment
 spec:
+  ports:
+   port: 4444
+  - protocol: TCP
+    targetPort: 4444
   selector:
     app: mypp
-    type: ClusterIP
-  ports:
-  - protocol: TCP
-    port: 4444
-    targetPort: 4444
+  type: ClusterIP
+  
