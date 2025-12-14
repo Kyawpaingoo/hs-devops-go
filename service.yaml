@@ -7,7 +7,7 @@ metadata:
 spec:
   ports:
    port: 4444
-  - protocol: TCP
+    - protocol: TCP
     targetPort: 4444
   selector:
     app: mypp
