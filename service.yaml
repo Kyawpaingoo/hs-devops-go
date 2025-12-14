@@ -1,15 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  label:
+  labels:
     app: myapp
-  name: myapp-deployment
+  name: myapp-service 
 spec:
   ports:
-   port: 4444
-    - protocol: TCP
-    targetPort: 4444
+  - port: 4444
+    protocol: TCP 
+    targetPort: 4444
   selector:
-    app: mypp
+     app: myapp
   type: ClusterIP
-  
