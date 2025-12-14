@@ -39,13 +39,9 @@ pipeline {
                 sh "docker push ttl.sh/my-go-app:2h"
             }
         }
-        stage("Docker Run Image"){
+        stage("Deploy to Kubernetes"){
             steps {
-                 withCredentials([sshUserPrivateKey(credentialsId: 'mykey', keyFileVariable: 'FILENAME', usernameVariable: 'USERNAME')]) {
-                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@docker "docker stop my-go-app || true"'
-                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@docker "docker rm my-go-app || true"'
-                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@docker "docker run -d -p 4444:4444 ttl.sh/my-go-app:2h"'
-                }
+                // create a deployment to the kubenetes cluster
             }
         }
     }
