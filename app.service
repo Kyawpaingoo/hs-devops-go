@@ -3,7 +3,10 @@ Description=My Application Service
 After=network.target
 
 [Service]
+User=ubuntu
 ExecStart=/home/ubuntu/app
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
+EOF'
