@@ -3,18 +3,18 @@
     - name: Copy the artifact
       copy:
         src: app
-        dest: /home/laborant/app
+        dest: /home/ubuntu/app
 
     - name: Create a unit file
       become: True
       copy:
         src: myapp.service
         dest: 
-          /etc/systemd/system/myapp.service
+          /etc/systemd/system/app.service
 
     - name: Start the service
       become: True
       ansible.builtin.systemd:
-        name: myapp.service
+        name: app.service
         daemon_reload: true
         state: started
