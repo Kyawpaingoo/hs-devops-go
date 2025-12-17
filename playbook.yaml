@@ -1,20 +1,37 @@
 - hosts: all
+  become: yes 
   tasks:
-    - name: Copy the artifact
+    - name: Stop the service if running
+      service:
+        name: app.service
+        state: stopped
+      ignore_errors: yes 
+
+    - name: Copy the binary artifact
       copy:
         src: app
         dest: /home/ubuntu/app
+        mode: '0755'
 
-    - name: Create a unit file
-      become: True
+    - name: Create systemd service file
       copy:
-        src: myapp.service
-        dest: 
-          /etc/systemd/system/app.service
+        dest: /etc/systemd/system/app.service
+        content: |
+          [Unit]
+          Description=My Go App
+          After=network.target
 
-    - name: Start the service
-      become: True
-      ansible.builtin.systemd:
+          [Service]
+          User=ubuntu
+          ExecStart=/home/ubuntu/app
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Start and Enable the service
+      systemd:
         name: app.service
-        daemon_reload: true
         state: started
+        enabled: yes
+        daemon_reload: yes
