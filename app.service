@@ -3,7 +3,7 @@ Description=My Application Service
 After=network.target
 
 [Service]
-ExecStart=/home/laborant/app
+ExecStart=/home/ubuntu/app
 
 [Install]
 WantedBy=multi-user.target
