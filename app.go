@@ -16,6 +16,11 @@ type Simple struct {
 	Url         string
 }
 
+var counter = promauto.NewCounter(prometheus.CounterOpts{
+    Name: "api_calls_total",
+    Help: "The total number of processed API calls",
+})
+
 func SimpleFactory(host string) Simple {
 	return Simple{"Hello", "Students", host}
 }
@@ -25,13 +30,19 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	jsonOutput, _ := json.Marshal(simple)
 
-	w.Header().Set("Content-Type", "application/json")
+	if r.URL.Path == "/" {
+        counter.Inc()
+    }
 
+	w.Header().Set("Content-Type", "application/json")
+	
 	fmt.Fprintln(w, string(jsonOutput))
 }
 
 func main() {
 	fmt.Println("Server started on port 4444")
+	http.Handle("/metrics", promhttp.Handler())
 	http.HandleFunc("/", handler)
+	
 	log.Fatal(http.ListenAndServe(":4444", nil))
 }
