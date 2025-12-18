@@ -6,6 +6,11 @@ pipeline {
     }
 
     stages {
+         stage('Install Dependencies') {
+            steps {
+                sh "go mod tidy"
+            }
+        }
         stage('Test') {
             steps {
                 sh "go test ./..."
