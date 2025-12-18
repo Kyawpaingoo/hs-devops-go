@@ -14,7 +14,7 @@ type Simple struct {
 }
 
 func SimpleFactory(host string) Simple {
-	return Simple{"Hello", "Students", host}
+	return Simple{"Hello", "Students", "break test"}
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
