@@ -8,13 +8,13 @@
     - name: Create a unit file
       become: True
       copy:
-        src: myapp.service
+        src: app.service
         dest: 
-          /etc/systemd/system/myapp.service
+          /etc/systemd/system/app.service
 
     - name: Start the service
       become: True
       ansible.builtin.systemd:
-        name: myapp.service
+        name: app.service
         daemon_reload: true
         state: started
