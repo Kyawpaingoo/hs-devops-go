@@ -26,7 +26,7 @@ jobs:
 
     - name: Deploy
       run: >
-        echo "${{ secrets.TARGET_SSH_KEY }}" > ~/.ssh/MYKEY
+        echo "${{ secrets.TARGET_SSH_KEY }}" > ~/.ssh/mykey
         chmod 600 ~/.ssh/mykey
-        sh 'scp -o StrictHostKeyChecking=no -i ${FILENAME} app laborant@target:'
+        sh 'scp -o StrictHostKeyChecking=no -i ~/.ssh/mykey app laborant@target:'
         
