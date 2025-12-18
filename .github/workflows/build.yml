@@ -24,4 +24,8 @@ jobs:
     - name: Build
       run: go build app.go
 
-    
+    - name: Deploy
+      run: 
+        echo "${{ secrets.TARGET_SSH_KEY }}" > ~/.ssh/mykey
+        sh 'scp -o StrictHostKeyChecking=no -i ${FILENAME} app ${USERNAME}@target:'
+        
