@@ -4,6 +4,7 @@
       copy:
         src: app
         dest: /home/laborant/app
+        mode: '0755'
 
     - name: Create a unit file
       become: True
