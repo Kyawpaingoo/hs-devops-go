@@ -28,5 +28,10 @@ jobs:
       run: 
         echo "${{ secrets.MYKEY }}" > ~/.ssh/mykey
         chmod 600 ~/.ssh/mykey
-        sh 'scp -o StrictHostKeyChecking=no -i ~/.ssh/mykey app laborant@target:'
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/mykey app laborant@target:~/
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/mykey myapp.service laborant@target:~/
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/mykey laborant@target "chmod +x app"
+        ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "sudo systemctl start app" || true
+
+        
         
