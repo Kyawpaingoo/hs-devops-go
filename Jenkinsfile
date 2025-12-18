@@ -25,13 +25,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'target-ssh-key', keyFileVariable: 'FILENAME', usernameVariable: 'USERNAME')]) {
-                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "sudo systemctl stop app" || true'
-                    sh 'scp -o StrictHostKeyChecking=no -i ${FILENAME} app app.service ${USERNAME}@target:'
+                    // sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "sudo systemctl stop app" || true'
+                    // sh 'scp -o StrictHostKeyChecking=no -i ${FILENAME} app app.service ${USERNAME}@target:'
 
-                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "chmod +x app"'
-                    sh 'sudo systemctl daemon-reload'
-                    sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "sudo systemctl start app" || true'
-                    // sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --inventory hosts.ini --key-file ${FILENAME} playbook.yaml'
+                    // sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "chmod +x app"'
+                    // sh 'sudo systemctl daemon-reload'
+                    // sh 'ssh -o StrictHostKeyChecking=no -i ${FILENAME} ${USERNAME}@target "sudo systemctl start app" || true'
+                    sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --inventory hosts.ini --key-file ${FILENAME} playbook.yaml'
                 }
             }
         }
